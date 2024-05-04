@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{% static "styles.css" %}">
+</head>
+<body>
+    {% if message is not None %}
+        <div id="message">
+            {% if message %}
+                <div style="color: green" class="msg-alert" id="close">Your registration is successful!  <button onclick="closeMessage()">X</button></div>
+            {% else %}
+                <div style="color: red;" class="msg-alert" id="close">Registration Failed!   <button onclick="closeMessage()">X</button></div>
+            {% endif %}
+        </div>
+    {% endif %} 
+
+    <div class="container">
+        
+        <p class="heading">Sign Up</p>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">
+                <h1>Username</h1>
+                <input type="text" name="username" id="username">
+            </label>
+            <label for="email">
+                <h1>Email</h1>
+                <input type="email" name="email" id="email">
+            </label>
+            <label for="password">
+                <h1>Password</h1>
+                <input type="password" name="password" id="password">
+            </label>
+            <label for="re-enterPassword">
+                <h1>Re-enter Password</h1>
+                <input type="password" name="re-enterPassword" id="re-enterPassword">
+            </label>
+            <button type="submit" id="submit" >Sign up</button>
+        </form>
+        <h3 class="subtitle">Already a member? <a href="/login">Login</a> </h3>
+    </div>
+</body>
+<script type="text/javascript">
+    function closeMessage() {
+        var messageDiv = document.getElementById('message');
+        messageDiv.style.display = 'none';
+    }
+</script>
+
+</html>

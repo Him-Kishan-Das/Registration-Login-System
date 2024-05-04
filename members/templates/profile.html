@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static "profile.css" %}">
+</head>
+<body>
+    {% if message is not None %}
+        <div id="message">
+            {% if message %}
+                <div style="color: green" class="msg-alert">Your Login is successful!<button onclick="closeMessage()" id="close">X</button></div>
+            {% endif %}
+        </div>
+    {% endif %} 
+    <div class="container">
+        <h1 class="username">Name: &nbsp <span>{{ userLogin }} </span></h1>
+        <h1 class="email">Email: &nbsp <span> {{ email }} </span></h1>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="submit" name="logout">LogOut</button>
+        </form>
+    
+    
+    </div>
+</body>
+<script type="text/javascript">
+    function closeMessage() {
+        var messageDiv = document.getElementById('message');
+        messageDiv.style.display = 'none';
+    }
+</script>
+
+</html>
